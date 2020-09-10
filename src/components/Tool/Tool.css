@@ -1,0 +1,37 @@
+.tool {
+  width: 100%;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  margin-bottom: 3rem;
+  padding: 2rem
+}
+
+.tool__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.tool__header__remove {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: baseline;
+
+  cursor: pointer;
+}
+
+.tool__description {
+  margin-bottom: 2.5rem;
+}
+
+.tool__tags {
+  width: 100%;
+}
+
+.tool__tags__tag {
+  margin-right: 1rem;
+  display: inline-block;
+}

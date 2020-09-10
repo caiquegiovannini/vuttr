@@ -1,9 +1,13 @@
 import React from 'react';
 
+import Home from './Pages/Home';
+
+import './global.css';
+
 function App() {
   return (
     <div className="App">
-      <h1>Hello VUTTR</h1>
+      <Home />
     </div>
   );
 }
