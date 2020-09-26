@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Tool from '../../components/Tool';
+import AddNewTool from '../../components/AddNewTool';
 
 import './Home.css';
 
@@ -32,6 +33,12 @@ const tools = [
 ];
 
 function Home() {
+  const [newToolModal, setNewToolModal] = useState(false);
+
+  function handleAddNewTool() {
+    setNewToolModal(true);
+  }
+
   return (
     <section className="container">
       <header className="header">
@@ -41,14 +48,28 @@ function Home() {
 
       <div className="actions">
         <div className="actions__search">
-          <input type="text" className="actions__search__input" placeholder="buscar" />
+          <input
+            type="text"
+            className="actions__search__input"
+            placeholder="buscar"
+          />
           <label htmlFor="tags-only">
-            <input type="checkbox" id="tags-only" className="actions__search__checkbox" />
+            <input
+              type="checkbox"
+              id="tags-only"
+              className="actions__search__checkbox"
+            />
             search in tags only
           </label>
         </div>
 
-        <button type="button" className="button button--add">+ Add</button>
+        <button
+          type="button"
+          className="button button--add"
+          onClick={handleAddNewTool}
+        >
+          + Add
+        </button>
       </div>
 
       {tools && (
@@ -56,6 +77,10 @@ function Home() {
           {tools.map((tool) => <Tool key={tool.id} tool={tool} />)}
         </section>
       )}
+
+      {newToolModal
+        && <AddNewTool />}
+
     </section>
   );
 }
