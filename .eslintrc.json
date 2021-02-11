@@ -19,14 +19,15 @@
     "sourceType": "module"
   },
   "plugins": [
+    "jest",
     "react"
   ],
   "rules": {
+    "indent": [2],
     "react/jsx-filename-extension": [
       1,
       {
         "extensions": [
-          ".js",
           ".jsx"
         ]
       }
