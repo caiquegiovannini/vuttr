@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Tool from '../../components/Tool';
 import AddNewTool from '../../components/AddNewTool';
 import Input from '../../components/Input';
+import Button from '../../components/Button';
 
 import './Home.css';
 
@@ -63,13 +64,12 @@ const Home = () => {
           />
         </div>
 
-        <button
-          type="button"
+        <Button
           className="button button--add"
           onClick={handleAddNewTool}
         >
           + Add
-        </button>
+        </Button>
       </div>
 
       {tools && (
