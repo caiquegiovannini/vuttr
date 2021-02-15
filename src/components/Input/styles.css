@@ -1,0 +1,20 @@
+.input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+}
+
+.input__label {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.input__field {
+  padding: 4px 8px;
+}
+
+@media (min-width: 768px) {
+  .input {
+    margin-bottom: 2.5rem;
+  }
+}
