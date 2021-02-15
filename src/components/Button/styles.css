@@ -1,0 +1,30 @@
+.button {
+  border: none;
+  border-radius: 5px;
+  padding: 5px 15px;
+  font-weight: 600;
+  font-size: 1.8rem;
+  color: #FFF;
+
+  cursor: pointer;
+}
+
+.button--add {
+  background: var(--color-primary);
+  padding: 5px;
+}
+
+.button--add:hover {
+  background: var(--color-primary-dark);
+}
+
+.button--add:active {
+  background: var(--color-primary-darker);
+}
+
+@media (min-width: 700px) {
+  .button {
+    padding: 5px 26px;
+    font-size: 2.2rem;
+  }
+}

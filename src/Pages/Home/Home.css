@@ -50,16 +50,3 @@
 .actions__search input[type="checkbox"] {
   margin-right: 1rem;
 }
-
-.button--add {
-  background: var(--color-primary);
-  padding: 5px;
-}
-
-.button--add:hover {
-  background: var(--color-primary-dark);
-}
-
-.button--add:active {
-  background: var(--color-primary-darker);
-}
