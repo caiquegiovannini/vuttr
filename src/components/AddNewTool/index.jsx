@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+
+import Input from '../Input';
 
 import { ReactComponent as CloseIcon } from '../../assets/icons/close.svg';
 
 import './AddNewTool.css';
 
 const AddNewTool = ({ onClose }) => {
+  const [toolName, setToolName] = useState();
+
   function handleAddTool(event) {
     event.preventDefault();
   }
@@ -21,10 +25,12 @@ const AddNewTool = ({ onClose }) => {
         </header>
 
         <form onSubmit={handleAddTool}>
-          <label htmlFor="name">
-            Tool Name
-            <input type="text" id="name" />
-          </label>
+          <Input
+            id="name"
+            label="Tool name"
+            value={toolName}
+            onChange={setToolName}
+          />
           <button type="submit" className="button">Add tool</button>
         </form>
       </div>

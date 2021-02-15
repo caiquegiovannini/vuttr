@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import Tool from '../../components/Tool';
 import AddNewTool from '../../components/AddNewTool';
+import Input from '../../components/Input';
 
 import './Home.css';
 
@@ -48,19 +49,18 @@ const Home = () => {
 
       <div className="actions">
         <div className="actions__search">
-          <input
-            type="text"
-            className="actions__search__input"
+          <Input
+            id="actions__search"
             placeholder="buscar"
+            value=""
+            onChange={() => { }}
           />
-          <label htmlFor="tags-only">
-            <input
-              type="checkbox"
-              id="tags-only"
-              className="actions__search__checkbox"
-            />
-            search in tags only
-          </label>
+          <Input
+            id="tags-only"
+            className="actions__search__checkbox"
+            type="checkbox"
+            label="search in tags only"
+          />
         </div>
 
         <button
