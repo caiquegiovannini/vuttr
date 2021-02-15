@@ -81,10 +81,10 @@ const Home = () => {
       {
         modalIsOpen
         && (
-        <AddNewTool
-          isOpen={modalIsOpen}
-          onClose={setModalIsOpen}
-        />
+          <AddNewTool
+            isOpen={modalIsOpen}
+            onClose={setModalIsOpen}
+          />
         )
       }
 
