@@ -22,6 +22,10 @@
   background: var(--color-primary-darker);
 }
 
+.button--transparent {
+  background: none;
+}
+
 @media (min-width: 700px) {
   .button {
     padding: 5px 26px;
