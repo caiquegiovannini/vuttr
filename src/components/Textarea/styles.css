@@ -1,0 +1,22 @@
+.textarea {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+}
+
+.textarea__label {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.textarea__field {
+  padding: 4px 8px;
+  height: 10rem;
+  resize: none;
+}
+
+@media (min-width: 768px) {
+  .textarea {
+    margin-bottom: 2.5rem;
+  }
+}
