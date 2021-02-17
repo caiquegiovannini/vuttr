@@ -19,7 +19,7 @@ const Input = ({
       id={id}
       placeholder={placeholder}
       value={value}
-      onChange={() => onChange}
+      onChange={onChange}
       className="input__field"
     />
   </div>
