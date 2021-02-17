@@ -24,14 +24,15 @@ const Button = ({
 };
 
 Button.defaultProps = {
-  isSubmit: null,
+  isSubmit: false,
   type: 'default',
+  onClick: null,
 };
 
 Button.propTypes = {
-  isSubmit: PropTypes.string,
-  children: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
+  isSubmit: PropTypes.bool,
+  children: PropTypes.node.isRequired,
+  onClick: PropTypes.func,
   type: PropTypes.string,
 };
 
