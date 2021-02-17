@@ -52,7 +52,7 @@ const Home = () => {
         <div className="actions__search">
           <Input
             id="actions__search"
-            placeholder="buscar"
+            placeholder="search"
             value=""
             onChange={() => { }}
           />
@@ -61,11 +61,14 @@ const Home = () => {
             className="actions__search__checkbox"
             type="checkbox"
             label="search in tags only"
+            value=""
+            onChange={() => { }}
           />
         </div>
 
         <Button
           className="button button--add"
+          type="add"
           onClick={handleAddNewTool}
         >
           + Add
