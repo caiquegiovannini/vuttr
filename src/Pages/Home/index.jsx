@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+import Loading from '../../components/Loading';
 import Tool from '../../components/Tool';
 import AddNewTool from '../../components/AddNewTool';
 import Input from '../../components/Input';
@@ -89,11 +90,12 @@ const Home = () => {
         </Button>
       </div>
 
-      {listedTools && (
+      {listedTools ? (
         <section className="tools-list" data-testid="tools-list">
           {listedTools.map((tool) => <Tool key={tool.id} tool={tool} />)}
         </section>
-      )}
+      )
+        : <Loading />}
 
       {
         modalIsOpen
