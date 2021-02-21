@@ -14,7 +14,7 @@ const Tool = ({ tool }) => {
     <div className="tool">
       <header className="tool__header">
         <a href={link}>
-          <h4>{title}</h4>
+          <h4 className="tool__title">{title}</h4>
         </a>
         <button type="button" className="tool__header__remove">
           <CloseIcon style={{ width: '1.2rem', height: '1.2rem', marginRight: '0.5rem' }} />
@@ -39,10 +39,10 @@ const Tool = ({ tool }) => {
 
 Tool.propTypes = {
   tool: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    link: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+    title: PropTypes.string,
+    link: PropTypes.string,
+    description: PropTypes.string,
+    tags: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
 };
 

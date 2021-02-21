@@ -24,6 +24,10 @@
   cursor: pointer;
 }
 
+.tool__title {
+  text-decoration: underline;
+}
+
 .tool__description {
   margin-bottom: 2.5rem;
 }
