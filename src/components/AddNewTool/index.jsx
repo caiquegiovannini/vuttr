@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
+import { addTool } from '../../services/api';
+
 import Input from '../Input';
 import Textarea from '../Textarea';
 import Button from '../Button';
@@ -9,35 +11,42 @@ import { ReactComponent as CloseIcon } from '../../assets/icons/close.svg';
 
 import './styles.css';
 
-const AddNewTool = ({ onClose }) => {
-  const [toolName, setToolName] = useState('');
-  const [toolLink, setToolLink] = useState('');
-  const [toolDescription, setToolDescription] = useState('');
+const AddNewTool = ({ setModalIsOpen }) => {
+  const [title, setTitle] = useState('');
+  const [link, setlink] = useState('');
+  const [description, setdescription] = useState('');
   const [tags, setTags] = useState('');
 
   function clearAllFields() {
-    setToolName('');
-    setToolLink('');
-    setToolDescription('');
+    setTitle('');
+    setlink('');
+    setdescription('');
     setTags('');
   }
 
   function closeModal() {
     clearAllFields();
-    onClose(false);
+    setModalIsOpen(false);
   }
 
-  function handleAddTool(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
     const tagsArray = tags.length > 0 ? tags.split(' ') : [];
+    const toolObject = {
+      title,
+      link,
+      description,
+      tags: tagsArray,
+    };
 
-    console.log({
-      toolName,
-      toolLink,
-      toolDescription,
-      tagsArray,
-    });
+    try {
+      await addTool(toolObject);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      closeModal();
+    }
   }
 
   return (
@@ -54,25 +63,25 @@ const AddNewTool = ({ onClose }) => {
           </Button>
         </header>
 
-        <form className="modal__form" onSubmit={handleAddTool}>
+        <form className="modal__form" onSubmit={handleSubmit}>
           <Input
             id="name"
             label="Tool name"
-            value={toolName}
-            onChange={(event) => setToolName(event.target.value)}
+            value={title}
+            onChange={(event) => setTitle(event.target.value)}
           />
           <Input
             id="link"
             label="Tool link"
             placeholder="https://"
-            value={toolLink}
-            onChange={(event) => setToolLink(event.target.value)}
+            value={link}
+            onChange={(event) => setlink(event.target.value)}
           />
           <Textarea
             id="description"
             label="Tool description"
-            value={toolDescription}
-            onChange={(event) => setToolDescription(event.target.value)}
+            value={description}
+            onChange={(event) => setdescription(event.target.value)}
           />
           <Input
             id="tags"
@@ -96,7 +105,7 @@ const AddNewTool = ({ onClose }) => {
 };
 
 AddNewTool.propTypes = {
-  onClose: PropTypes.func.isRequired,
+  setModalIsOpen: PropTypes.func.isRequired,
 };
 
 export default AddNewTool;
