@@ -7,7 +7,7 @@ import AddNewTool from '../../components/AddNewTool';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
-import './Home.css';
+import './styles.css';
 
 const Home = () => {
   const allToolsMock = [
@@ -39,9 +39,49 @@ const Home = () => {
   const [allTools, setAllTools] = useState();
   const [listedTools, setListedTools] = useState();
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [searchInput, setSearchInput] = useState('');
+  const [tagsOnly, setTagsOnly] = useState(false);
 
   function handleAddNewTool() {
     setModalIsOpen(true);
+  }
+
+  function searchByTagsOnly(inputText) {
+    if (inputText === '') {
+      return allTools;
+    }
+
+    const searchedTools = allTools.filter((tool) => (
+      tool.tags.includes(inputText.toLowerCase())
+    ));
+
+    return searchedTools;
+  }
+
+  function searchByTitleAndTag(inputText) {
+    const resultsByTitle = allTools.filter((tool) => (
+      tool.title.toLowerCase().includes(inputText.toLowerCase())
+    ));
+    const resultsByTags = searchByTagsOnly(inputText);
+    const allResults = [...resultsByTitle, ...resultsByTags];
+    const allUniqueResults = [...new Set(allResults)];
+
+    return allUniqueResults;
+  }
+
+  function handleSearch(event) {
+    const inputText = event.target.value;
+    setSearchInput(inputText);
+
+    if (tagsOnly) {
+      const resultByTags = searchByTagsOnly(inputText);
+
+      setListedTools(resultByTags);
+    } else {
+      const allResults = searchByTitleAndTag(inputText);
+
+      setListedTools(allResults);
+    }
   }
 
   useEffect(() => {
@@ -68,16 +108,16 @@ const Home = () => {
           <Input
             id="actions__search"
             placeholder="search by title or tag"
-            value=""
-            onChange={() => { }}
+            value={searchInput}
+            onChange={(event) => handleSearch(event)}
           />
           <Input
             id="tags-only"
             className="actions__search__checkbox"
             type="checkbox"
             label="search in tags only"
-            value=""
-            onChange={() => { }}
+            value={tagsOnly}
+            onChange={() => setTagsOnly(!tagsOnly)}
           />
         </div>
 
