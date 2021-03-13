@@ -11,7 +11,7 @@ const RemoveConfirmation = ({
   title, cancel, remove, isRemoving,
 }) => (
   <Modal
-    title="X Remove tool"
+    title="Remove tool"
     closeModal={cancel}
   >
     <p className="remove-text">
