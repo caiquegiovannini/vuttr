@@ -4,6 +4,13 @@
   --color-primary: #365DF0;
   --color-primary-dark: #2F55CC;
   --color-primary-darker: #244AA8;
+  --color-secondary: #E1E7FD;
+  --color-secondary-dark:#CAD6FC;
+  --color-secondary-darker: #B9C6FA;
+  --color-danger: #F95E5A;
+  --color-danger-light: #FCAEAC;
+  --color-danger-dark: #CC4C4C;
+  --color-danger-darker: #A53F3F;
   --color-bg-input: #F5F4F6;
   --color-bg-card: #FFFFFF;
   --color-border: #EBEAED;
@@ -32,7 +39,6 @@ body,
 
 body,
 input,
-button,
 textarea {
   color: var(--color-text-primary);
   font-family: 'Source Sans Pro', sans-serif;
