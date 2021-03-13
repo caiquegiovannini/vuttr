@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 
 import { ReactComponent as CloseIcon } from '../../assets/icons/close.svg';
 
-import './Tool.css';
+import './styles.css';
 
-const Tool = ({ tool }) => {
+const ToolCard = ({
+  tool, openRemovalConfirmation,
+}) => {
   const {
     title, link, description, tags,
   } = tool;
@@ -16,8 +18,12 @@ const Tool = ({ tool }) => {
         <a href={link}>
           <h4 className="tool__title">{title}</h4>
         </a>
-        <button type="button" className="tool__header__remove">
-          <CloseIcon style={{ width: '1.2rem', height: '1.2rem', marginRight: '0.5rem' }} />
+        <button
+          type="button"
+          className="tool__header__remove"
+          onClick={() => openRemovalConfirmation(tool)}
+        >
+          <CloseIcon style={{ width: '1.1rem', height: '1.1rem', marginRight: '0.5rem' }} />
           remove
         </button>
       </header>
@@ -37,13 +43,14 @@ const Tool = ({ tool }) => {
   );
 };
 
-Tool.propTypes = {
+ToolCard.propTypes = {
   tool: PropTypes.shape({
     title: PropTypes.string,
     link: PropTypes.string,
     description: PropTypes.string,
     tags: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
+  openRemovalConfirmation: PropTypes.func.isRequired,
 };
 
-export default Tool;
+export default ToolCard;

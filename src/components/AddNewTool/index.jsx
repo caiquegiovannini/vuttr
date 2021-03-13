@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 
 import { addTool } from '../../services/api';
 
+import Modal from '../Modal';
 import Input from '../Input';
 import Textarea from '../Textarea';
 import Button from '../Button';
-
-import { ReactComponent as CloseIcon } from '../../assets/icons/close.svg';
 
 import './styles.css';
 
@@ -50,57 +49,48 @@ const AddNewTool = ({ setModalIsOpen }) => {
   }
 
   return (
-    <section className="modal-overlay">
-      <div className="modal">
-        <header className="modal__header">
-          <h4>+ Add new tool</h4>
-
+    <Modal
+      title="+ Add new tool"
+      hasCLoseButton
+      closeModal={closeModal}
+    >
+      <form className="modal__form" onSubmit={handleSubmit}>
+        <Input
+          id="name"
+          label="Tool name"
+          value={title}
+          onChange={(event) => setTitle(event.target.value)}
+        />
+        <Input
+          id="link"
+          label="Tool link"
+          placeholder="https://"
+          value={link}
+          onChange={(event) => setlink(event.target.value)}
+        />
+        <Textarea
+          id="description"
+          label="Tool description"
+          value={description}
+          onChange={(event) => setdescription(event.target.value)}
+        />
+        <Input
+          id="tags"
+          label="Tags"
+          placeholder="separate tags by space"
+          value={tags}
+          onChange={(event) => setTags(event.target.value)}
+        />
+        <div className="modal__form__button">
           <Button
-            onClick={closeModal}
-            type="transparent"
+            type="add"
+            isSubmit
           >
-            <CloseIcon style={{ width: '1rem', height: '1rem' }} />
+            Add tool
           </Button>
-        </header>
-
-        <form className="modal__form" onSubmit={handleSubmit}>
-          <Input
-            id="name"
-            label="Tool name"
-            value={title}
-            onChange={(event) => setTitle(event.target.value)}
-          />
-          <Input
-            id="link"
-            label="Tool link"
-            placeholder="https://"
-            value={link}
-            onChange={(event) => setlink(event.target.value)}
-          />
-          <Textarea
-            id="description"
-            label="Tool description"
-            value={description}
-            onChange={(event) => setdescription(event.target.value)}
-          />
-          <Input
-            id="tags"
-            label="Tags"
-            placeholder="separate tags by space"
-            value={tags}
-            onChange={(event) => setTags(event.target.value)}
-          />
-          <div className="modal__form__button">
-            <Button
-              type="add"
-              isSubmit
-            >
-              Add tool
-            </Button>
-          </div>
-        </form>
-      </div>
-    </section>
+        </div>
+      </form>
+    </Modal>
   );
 };
 

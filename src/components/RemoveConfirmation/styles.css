@@ -1,0 +1,27 @@
+.remove-button-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.remove-button-group button:first-child {
+  margin-bottom: 1rem;
+}
+
+.remove-text {
+  margin-bottom: 4rem;
+}
+
+@media (min-width: 700px) {
+  .remove-button-group {
+    flex-direction: row-reverse;
+    width: 60%;
+    margin-left: auto;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .remove-button-group button:first-child {
+    margin-bottom: 0;
+  }
+}
