@@ -1,25 +1,26 @@
 import React, { useEffect, useState } from 'react';
 
-import { getTools } from '../../services/api';
+import { getTools, removeTool } from '../../services/api';
 
 import Loading from '../../components/Loading';
-import Tool from '../../components/Tool';
+import ToolCard from '../../components/ToolCard';
 import AddNewTool from '../../components/AddNewTool';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import RemoveConfirmation from '../../components/RemoveConfirmation';
 
 import './styles.css';
 
 const Home = () => {
   const [allTools, setAllTools] = useState();
   const [listedTools, setListedTools] = useState();
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [addToolModalIsOpen, setAddToolModalIsOpen] = useState(false);
   const [searchInput, setSearchInput] = useState('');
   const [tagsOnly, setTagsOnly] = useState(false);
 
-  function handleAddNewTool() {
-    setModalIsOpen(true);
-  }
+  const [isRemovalConfirmation, setIsRemovalConfirmation] = useState(false);
+  const [isRemoving, setIsRemoving] = useState(false);
+  const [toolToRemove, setToolToRemove] = useState();
 
   function searchByTagsOnly(inputText) {
     if (inputText === '') {
@@ -59,6 +60,24 @@ const Home = () => {
     }
   }
 
+  function openRemovalConfirmation(tool) {
+    setIsRemovalConfirmation(true);
+    setToolToRemove(tool);
+  }
+
+  async function handleRemove(id) {
+    setIsRemoving(true);
+
+    try {
+      await removeTool(id);
+    } catch (error) {
+      console.error(error);
+    }
+
+    setIsRemovalConfirmation(false);
+    setIsRemoving(false);
+  }
+
   useEffect(() => {
     async function fetchAllTolls() {
       const data = await getTools();
@@ -68,7 +87,7 @@ const Home = () => {
     }
 
     fetchAllTolls();
-  }, [setAllTools, setListedTools, modalIsOpen]);
+  }, [setAllTools, setListedTools, addToolModalIsOpen, isRemovalConfirmation]);
 
   return (
     <section className="container">
@@ -98,29 +117,50 @@ const Home = () => {
         <Button
           className="button button--add"
           type="add"
-          onClick={handleAddNewTool}
+          onClick={() => setAddToolModalIsOpen(true)}
         >
           + Add
         </Button>
       </div>
 
-      {listedTools ? (
-        <section className="tools-list" data-testid="tools-list">
-          {listedTools.map((tool) => <Tool key={tool.id} tool={tool} />)}
-        </section>
-      )
-        : <Loading />}
+      {
+        listedTools ? (
+          <section className="tools-list" data-testid="tools-list">
+            {
+              listedTools.map((tool) => (
+                <ToolCard
+                  key={tool.id}
+                  tool={tool}
+                  openRemovalConfirmation={openRemovalConfirmation}
+                />
+              ))
+            }
+          </section>
+        )
+          : <Loading />
+      }
 
       {
-        modalIsOpen
+        addToolModalIsOpen
         && (
           <AddNewTool
-            isOpen={modalIsOpen}
-            setModalIsOpen={setModalIsOpen}
+            isOpen={addToolModalIsOpen}
+            setModalIsOpen={setAddToolModalIsOpen}
           />
         )
       }
 
+      {
+        isRemovalConfirmation
+        && (
+          <RemoveConfirmation
+            cancel={() => setIsRemovalConfirmation(false)}
+            title={toolToRemove.title}
+            remove={() => handleRemove(toolToRemove.id)}
+            isRemoving={isRemoving}
+          />
+        )
+      }
     </section>
   );
 };
